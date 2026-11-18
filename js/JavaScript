@@ -1,0 +1,24 @@
+import { supabase } from './supabase.js'
+
+const formLogin = document.querySelector('#form-login')
+const mensagemErro = document.querySelector('#mensagem-erro')
+
+formLogin.addEventListener('submit', async (e) => {
+    e.preventDefault()
+    
+    const email = document.querySelector('#email').value
+    const senha = document.querySelector('#senha').value
+
+    const { data, error } = await supabase.auth.signInWithPassword({
+        email: email,
+        password: senha,
+    })
+
+    if (error) {
+        mensagemErro.textContent = 'E-mail ou senha incorretos.'
+        mensagemErro.style.display = 'block'
+    } else {
+        // Se o login for bem-sucedido, redireciona para o dashboard
+        window.location.href = 'dashboard.html'
+    }
+})
