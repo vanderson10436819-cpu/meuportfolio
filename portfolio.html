@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfólio de Projetos | Meus Trabalhos</title>
+    <meta name="description" content="Veja os projetos práticos que desenvolvi utilizando HTML, CSS, JavaScript e banco de dados Supabase.">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <img src="img/logo.svg" alt="Logo da Marca Pessoal">
+            <span class="nome-marca">MeuPortfólio</span>
+        </div>
+        <nav>
+            <a href="index.html">Início</a>
+            <a href="quemsoueu.html">Quem sou eu</a>
+            <a href="portfolio.html" class="ativo">Portfólio</a>
+            <a href="login.html" aria-label="Entrar na área restrita"><i data-lucide="lock"></i></a>
+        </nav>
+    </header>
+
+    <main class="container-conteudo">
+        <h1>Meus Projetos</h1>
+        <p>Aqui estão os trabalhos desenvolvidos ao longo do curso. Os dados são carregados diretamente do banco de dados na nuvem.</p>
+        
+        <!-- Container onde o JavaScript vai inserir os projetos da tabela 'projetos' -->
+        <div id="lista-projetos" class="grid-projetos">
+            <p>Carregando projetos...</p>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 - Portfólio Pessoal</p>
+    </footer>
+
+    <!-- Script que busca os projetos do Supabase -->
+    <script type="module">
+        import { supabase } from './js/supabase.js'
+
+        async function carregarProjetos() {
+            const container = document.querySelector('#lista-projetos')
+            
+            const { data: projetos, error } = await supabase
+                .from('projetos')
+                .select('*')
+                .order('created_at', { ascending: false })
+
+            if (error) {
+                container.innerHTML = '<p>Erro ao carregar os projetos. Tente novamente mais tarde.</p>'
+                console.error(error)
+                return
+            }
+
+            if (projetos.length === 0) {
+                container.innerHTML = '<p>Nenhum projeto cadastrado ainda.</p>'
+                return
+            }
+
+            container.innerHTML = ''
+            
+            projetos.forEach(projeto => {
+                const article = document.createElement('article')
+                article.classList.add('card-projeto')
+                
+                article.innerHTML = `
+                    <img src="${projeto.imagem_url}" alt="${projeto.imagem_alt}">
+                    <h3>${projeto.titulo}</h3>
+                    <p>${projeto.descricao}</p>
+                    <div class="tags">
+                        ${projeto.tecnologias ? projeto.tecnologias.map(t => `<span>${t}</span>`).join('') : ''}
+                    </div>
+                    <div class="links-projeto">
+                        ${projeto.link_projeto ? `<a href="${projeto.link_projeto}" target="_blank">Acessar Site</a>` : ''}
+                        ${projeto.link_github ? `<a href="${projeto.link_github}" target="_blank">GitHub</a>` : ''}
+                    </div>
+                `
+                container.appendChild(article)
+            })
+        }
+
+        carregarProjetos()
+    </script>
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
