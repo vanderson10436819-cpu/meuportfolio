@@ -1,0 +1,303 @@
+/* Configuração Básica */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: system-ui, -apple-system, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f9f9f9;
+}
+
+/* Header e Menu */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 5%;
+    background-color: #ffffff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.logo-container img {
+    width: 32px;
+    height: 32px;
+}
+
+.nome-marca {
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+nav a {
+    text-decoration: none;
+    color: #555;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+nav a:hover, nav a.ativo {
+    color: #0066cc;
+}
+
+/* Hero Section */
+.hero {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    gap: 2rem;
+    padding: 4rem 5%;
+    background: #ffffff;
+    text-align: center;
+}
+
+@media (min-width: 768px) {
+    .hero {
+        flex-direction: row;
+        text-align: left;
+        justify-content: space-between;
+    }
+}
+
+.hero-texto h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: #111;
+}
+
+.hero-texto p {
+    font-size: 1.1rem;
+    color: #666;
+    margin-bottom: 1.5rem;
+}
+
+.habilidades {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 1.5rem;
+    justify-content: center;
+}
+
+@media (min-width: 768px) {
+    .habilidades {
+        justify-content: flex-start;
+    }
+}
+
+.habilidades span {
+    background: #eef2f7;
+    color: #0066cc;
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.hero-img img {
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+/* Sections de Atualidades */
+.atualidades-container {
+    max-width: 800px;
+    margin: 3rem auto;
+    padding: 0 5%;
+}
+
+.atualidades-container section {
+    background: #ffffff;
+    padding: 2rem;
+    margin-bottom: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+}
+
+.atualidades-container h2 {
+    font-size: 1.4rem;
+    margin-bottom: 0.8rem;
+    color: #222;
+}
+
+/* Conteúdo Geral & Grid de Projetos */
+.container-conteudo {
+    max-width: 1000px;
+    margin: 3rem auto;
+    padding: 0 5%;
+}
+
+.grid-projetos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.card-projeto {
+    background: #ffffff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    display: flex;
+    flex-direction: column;
+}
+
+.card-projeto img {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+}
+
+.card-projeto h3, .card-projeto p, .card-projeto .tags, .card-projeto .links-projeto {
+    padding: 0 1.2rem;
+}
+
+.card-projeto h3 {
+    margin-top: 1rem;
+    font-size: 1.2rem;
+}
+
+.card-projeto p {
+    color: #666;
+    font-size: 0.95rem;
+    margin: 0.5rem 0 1rem 0;
+    flex-grow: 1;
+}
+
+.card-projeto .tags {
+    display: flex;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+}
+
+.card-projeto .tags span {
+    font-size: 0.8rem;
+    background: #f1f3f5;
+    padding: 0.2rem 0.6rem;
+    border-radius: 4px;
+}
+
+.links-projeto {
+    padding-bottom: 1.2rem;
+    display: flex;
+    gap: 1rem;
+}
+
+.links-projeto a {
+    text-decoration: none;
+    color: #0066cc;
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+
+/* Formulários (Dashboard e Login) */
+.form-admin, .login-card form {
+    background: #fff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    margin-top: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+.form-admin div, .login-card form div {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.form-admin label, .login-card label {
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+
+.form-admin input, .form-admin textarea, .login-card input {
+    padding: 0.8rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+/* Estilos de Tela de Login */
+.body-login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f1f3f5;
+}
+
+.login-card {
+    width: 100%;
+    max-width: 400px;
+    padding: 2rem;
+}
+
+/* Botões e Links */
+.btn {
+    display: inline-block;
+    background-color: #0066cc;
+    color: #ffffff;
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    font-weight: 500;
+    text-decoration: none;
+    cursor: pointer;
+    text-align: center;
+    transition: background-color 0.2s;
+}
+
+.btn:hover {
+    background-color: #0052a3;
+}
+
+.btn-link {
+    background: none;
+    border: none;
+    color: #555;
+    font-weight: 500;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.btn-link:hover {
+    color: #0066cc;
+}
+
+/* Rodapé */
+footer {
+    text-align: center;
+    padding: 2rem 5%;
+    background-color: #ffffff;
+    color: #666;
+    font-size: 0.9rem;
+    margin-top: 4rem;
+    border-top: 1px solid #eee;
+}
