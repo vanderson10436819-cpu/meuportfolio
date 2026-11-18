@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | Painel de Controle</title>
+    <!-- Área restrita não deve aparecer no Google -->
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <img src="img/logo.svg" alt="Logo">
+            <span class="nome-marca">Painel Administrativo</span>
+        </div>
+        <nav>
+            <a href="index.html">Ver site</a>
+            <button id="btn-sair" class="btn-link">Sair</button>
+        </nav>
+    </header>
+
+    <main class="container-conteudo">
+        <h1>Cadastrar Novo Projeto</h1>
+        <form id="form-projeto" class="form-admin">
+            <div>
+                <label for="titulo">Título do Projeto:</label>
+                <input type="text" id="titulo" required>
+            </div>
+            <div>
+                <label for="descricao">Descrição:</label>
+                <textarea id="descricao" rows="4" required></textarea>
+            </div>
+            <div>
+                <label for="imagem_url">URL da Imagem (WebP):</label>
+                <input type="url" id="imagem_url" placeholder="https://..." required>
+            </div>
+            <div>
+                <label for="imagem_alt">Texto Alternativo (Alt para SEO):</label>
+                <input type="text" id="imagem_alt" required>
+            </div>
+            <div>
+                <label for="link_projeto">Link do Site Publicado:</label>
+                <input type="url" id="link_projeto" placeholder="https://...">
+            </div>
+            <div>
+                <label for="link_github">Link do Repositório GitHub:</label>
+                <input type="url" id="link_github" placeholder="https://github.com/...">
+            </div>
+            <div>
+                <label for="tecnologias">Tecnologias (separadas por vírgula):</label>
+                <input type="text" id="tecnologias" placeholder="HTML, CSS, JavaScript">
+            </div>
+            <button type="submit" class="btn">Salvar Projeto</button>
+            <p id="mensagem-status" style="margin-top: 10px;"></p>
+        </form>
+    </main>
+
+    <!-- Script de autenticação e envio para o Supabase -->
+    <script type="module">
+        import { supabase } from './js/supabase.js'
+
+        // Verifica se o usuário está logado
+        async function verificarSessao() {
+            const { data: { session } } = await supabase.auth.getSession()
+            if (!session) {
+                window.location.href = 'login.html'
+            }
+        }
+        verificarSessao()
+
+        // Botão de Sair
+        document.querySelector('#btn-sair').addEventListener('click', async () => {
+            await supabase.auth.signOut()
+            window.location.href = 'login.html'
+        })
+
+        // Envio do formulário para a tabela 'projetos'
+        const form = document.querySelector('#form-projeto')
+        const status = document.querySelector('#mensagem-status')
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault()
+
+            const tecnologiasArray = document.querySelector('#tecnologias').value
+                .split(',')
+                .map(t => t.trim())
+                .filter(t => t.length > 0)
+
+            const novoProjeto = {
+                titulo: document.querySelector('#titulo').value,
+                descricao: document.querySelector('#descricao').value,
+                imagem_url: document.querySelector('#imagem_url').value,
+                imagem_alt: document.querySelector('#imagem_alt').value,
+                link_projeto: document.querySelector('#link_projeto').value,
+                link_github: document.querySelector('#link_github').value,
+                tecnologias: tecnologiasArray
+            }
+
+            const { error } = await supabase.from('projetos').insert([novoProjeto])
+
+            if (error) {
+                status.textContent = 'Erro ao salvar projeto: ' + error.message
+                status.style.color = 'red'
+            } else {
+                status.textContent = 'Projeto cadastrado com sucesso!'
+                status.style.color = 'green'
+                form.reset()
+            }
+        })
+    </script>
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
