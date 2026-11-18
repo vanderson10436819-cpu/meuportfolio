@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | Área Restrita</title>
+    <!-- Área restrita não deve aparecer no Google -->
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="body-login">
+    <main class="login-card">
+        <h1>Área Restrita</h1>
+        <p>Faça login para acessar o painel de gerenciamento.</p>
+        
+        <form id="form-login">
+            <div>
+                <label for="email">E-mail:</label>
+                <input type="email" id="email" required>
+            </div>
+            <div>
+                <label for="senha">Senha:</label>
+                <input type="password" id="senha" required>
+            </div>
+            <button type="submit" class="btn">Entrar</button>
+            <p id="mensagem-erro" style="color: red; display: none; margin-top: 10px;"></p>
+        </form>
+        <p style="margin-top: 15px;"><a href="index.html">&larr; Voltar para a Página Inicial</a></p>
+    </main>
+
+    <script type="module" src="js/login.js"></script>
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
