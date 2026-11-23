@@ -6,7 +6,6 @@ const mensagemErro = document.querySelector('#mensagem-erro')
 formLogin.addEventListener('submit', async (e) => {
     e.preventDefault()
     
-    // Mostra na tela que está a carregar
     mensagemErro.textContent = 'A processar login...'
     mensagemErro.style.color = 'blue'
     mensagemErro.style.display = 'block'
@@ -21,7 +20,6 @@ formLogin.addEventListener('submit', async (e) => {
         })
 
         if (error) {
-            // Exibe o erro exato do Supabase na tela do site
             mensagemErro.textContent = 'Erro: ' + error.message
             mensagemErro.style.color = 'red'
         } else {
