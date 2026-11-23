@@ -1,4 +1,16 @@
-/* Configuração Básica */
+/* --- Variáveis e Configurações Globais --- */
+:root {
+    --primary-color: #0066cc;
+    --primary-hover: #0052a3;
+    --bg-color: #f8f9fa;
+    --card-bg: #ffffff;
+    --text-color: #333333;
+    --text-muted: #6c757d;
+    --border-color: #dee2e6;
+    --radius: 8px;
+    --transition: all 0.3s ease;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -6,33 +18,33 @@
 }
 
 body {
-    font-family: system-ui, -apple-system, sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
     line-height: 1.6;
-    color: #333;
-    background-color: #f9f9f9;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
-/* Header e Menu */
+/* --- Cabeçalho e Navegação --- */
 header {
+    background-color: var(--card-bg);
+    border-bottom: 1px solid var(--border-color);
+    padding: 1rem 2rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem 5%;
-    background-color: #ffffff;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-    position: sticky;
-    top: 0;
-    z-index: 100;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
 }
 
 .logo-container {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: 10px;
 }
 
 .logo-container img {
-    width: 32px;
     height: 32px;
 }
 
@@ -43,261 +55,124 @@ header {
 
 nav {
     display: flex;
+    gap: 20px;
     align-items: center;
-    gap: 1.5rem;
 }
 
-nav a {
+nav a, .btn-link {
     text-decoration: none;
-    color: #555;
+    color: var(--text-color);
     font-weight: 500;
-    transition: color 0.2s;
-}
-
-nav a:hover, nav a.ativo {
-    color: #0066cc;
-}
-
-/* Hero Section */
-.hero {
-    display: flex;
-    flex-direction: column-reverse;
-    align-items: center;
-    gap: 2rem;
-    padding: 4rem 5%;
-    background: #ffffff;
-    text-align: center;
-}
-
-@media (min-width: 768px) {
-    .hero {
-        flex-direction: row;
-        text-align: left;
-        justify-content: space-between;
-    }
-}
-
-.hero-texto h1 {
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
-    color: #111;
-}
-
-.hero-texto p {
-    font-size: 1.1rem;
-    color: #666;
-    margin-bottom: 1.5rem;
-}
-
-.habilidades {
-    display: flex;
-    gap: 0.5rem;
-    flex-wrap: wrap;
-    margin-bottom: 1.5rem;
-    justify-content: center;
-}
-
-@media (min-width: 768px) {
-    .habilidades {
-        justify-content: flex-start;
-    }
-}
-
-.habilidades span {
-    background: #eef2f7;
-    color: #0066cc;
-    padding: 0.3rem 0.8rem;
-    border-radius: 20px;
-    font-size: 0.9rem;
-    font-weight: 500;
-}
-
-.hero-img img {
-    width: 220px;
-    height: 220px;
-    border-radius: 50%;
-    object-fit: cover;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-}
-
-/* Sections de Atualidades */
-.atualidades-container {
-    max-width: 800px;
-    margin: 3rem auto;
-    padding: 0 5%;
-}
-
-.atualidades-container section {
-    background: #ffffff;
-    padding: 2rem;
-    margin-bottom: 1.5rem;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.03);
-}
-
-.atualidades-container h2 {
-    font-size: 1.4rem;
-    margin-bottom: 0.8rem;
-    color: #222;
-}
-
-/* Conteúdo Geral & Grid de Projetos */
-.container-conteudo {
-    max-width: 1000px;
-    margin: 3rem auto;
-    padding: 0 5%;
-}
-
-.grid-projetos {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 1.5rem;
-    margin-top: 2rem;
-}
-
-.card-projeto {
-    background: #ffffff;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-    display: flex;
-    flex-direction: column;
-}
-
-.card-projeto img {
-    width: 100%;
-    height: 160px;
-    object-fit: cover;
-}
-
-.card-projeto h3, .card-projeto p, .card-projeto .tags, .card-projeto .links-projeto {
-    padding: 0 1.2rem;
-}
-
-.card-projeto h3 {
-    margin-top: 1rem;
-    font-size: 1.2rem;
-}
-
-.card-projeto p {
-    color: #666;
-    font-size: 0.95rem;
-    margin: 0.5rem 0 1rem 0;
-    flex-grow: 1;
-}
-
-.card-projeto .tags {
-    display: flex;
-    gap: 0.4rem;
-    flex-wrap: wrap;
-    margin-bottom: 1rem;
-}
-
-.card-projeto .tags span {
-    font-size: 0.8rem;
-    background: #f1f3f5;
-    padding: 0.2rem 0.6rem;
-    border-radius: 4px;
-}
-
-.links-projeto {
-    padding-bottom: 1.2rem;
-    display: flex;
-    gap: 1rem;
-}
-
-.links-projeto a {
-    text-decoration: none;
-    color: #0066cc;
-    font-weight: 500;
-    font-size: 0.9rem;
-}
-
-/* Formulários (Dashboard e Login) */
-.form-admin, .login-card form {
-    background: #fff;
-    padding: 2rem;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-    margin-top: 1.5rem;
-    display: flex;
-    flex-direction: column;
-    gap: 1.2rem;
-}
-
-.form-admin div, .login-card form div {
-    display: flex;
-    flex-direction: column;
-    gap: 0.4rem;
-}
-
-.form-admin label, .login-card label {
-    font-weight: 500;
-    font-size: 0.9rem;
-}
-
-.form-admin input, .form-admin textarea, .login-card input {
-    padding: 0.8rem;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+    background: none;
+    border: none;
+    cursor: pointer;
     font-size: 1rem;
+    transition: var(--transition);
 }
 
-/* Estilos de Tela de Login */
+nav a:hover, nav a.active, .btn-link:hover {
+    color: var(--primary-color);
+}
+
+/* --- Layout Principal e Containers --- */
+main {
+    flex: 1;
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.container-conteudo {
+    max-width: 800px;
+}
+
+h1 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    color: var(--text-color);
+}
+
+/* --- Formulários e Autenticação (Login / Dashboard) --- */
+.login-card, .form-admin {
+    background-color: var(--card-bg);
+    padding: 2.5rem;
+    border-radius: var(--radius);
+    border: 1px solid var(--border-color);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
 .body-login {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
-    background-color: #f1f3f5;
+    height: 100vh;
 }
 
 .login-card {
     width: 100%;
     max-width: 400px;
-    padding: 2rem;
 }
 
-/* Botões e Links */
+form div {
+    margin-bottom: 1.25rem;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    font-size: 0.95rem;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="url"],
+textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    font-size: 1rem;
+    outline: none;
+    transition: var(--transition);
+}
+
+input:focus, textarea:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.1);
+}
+
+/* --- Botões --- */
 .btn {
     display: inline-block;
-    background-color: #0066cc;
-    color: #ffffff;
-    padding: 0.8rem 1.5rem;
+    background-color: var(--primary-color);
+    color: white;
+    padding: 0.75rem 1.5rem;
     border: none;
-    border-radius: 4px;
+    border-radius: var(--radius);
     font-size: 1rem;
-    font-weight: 500;
-    text-decoration: none;
+    font-weight: 600;
     cursor: pointer;
     text-align: center;
-    transition: background-color 0.2s;
+    transition: var(--transition);
+    width: 100%;
 }
 
 .btn:hover {
-    background-color: #0052a3;
+    background-color: var(--primary-hover);
 }
 
-.btn-link {
-    background: none;
-    border: none;
-    color: #555;
-    font-weight: 500;
-    cursor: pointer;
-    font-size: 1rem;
-}
-
-.btn-link:hover {
-    color: #0066cc;
-}
-
-/* Rodapé */
-footer {
-    text-align: center;
-    padding: 2rem 5%;
-    background-color: #ffffff;
-    color: #666;
-    font-size: 0.9rem;
-    margin-top: 4rem;
-    border-top: 1px solid #eee;
+/* --- Responsividade Básica --- */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        gap: 15px;
+        padding: 1rem;
+    }
+    
+    main {
+        padding: 1rem;
+    }
 }
