@@ -1,37 +1,38 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login | Área Restrita</title>
-    <!-- Área restrita não deve aparecer no Google -->
-    <meta name="robots" content="noindex, nofollow">
-    <link rel="stylesheet" href="css/style.css">
-    <script src="https://unpkg.com/lucide@latest"></script>
-</head>
-<body class="body-login">
-    <main class="login-card">
-        <h1>Área Restrita</h1>
-        <p>Faça login para acessar o painel de gerenciamento.</p>
-        
-        <form id="form-login">
-            <div>
-                <label for="email">E-mail:</label>
-                <input type="email" id="email" required>
-            </div>
-            <div>
-                <label for="senha">Senha:</label>
-                <input type="password" id="senha" required>
-            </div>
-            <button type="submit" class="btn">Entrar</button>
-            <p id="mensagem-erro" style="color: red; display: none; margin-top: 10px;"></p>
-        </form>
-        <p style="margin-top: 15px;"><a href="index.html">&larr; Voltar para a Página Inicial</a></p>
-    </main>
+import { supabase } from './supabase.js'
 
-    <script type="module" src="js/login.js"></script>
-    <script>
-        lucide.createIcons();
-    </script>
-</body>
-</html>
+const formLogin = document.querySelector('#form-login')
+const mensagemErro = document.querySelector('#mensagem-erro')
+
+formLogin.addEventListener('submit', async (e) => {
+    e.preventDefault()
+    
+    // Mostra na tela que está a carregar
+    mensagemErro.textContent = 'A processar login...'
+    mensagemErro.style.color = 'blue'
+    mensagemErro.style.display = 'block'
+
+    const email = document.querySelector('#email').value
+    const senha = document.querySelector('#senha').value
+
+    try {
+        const { data, error } = await supabase.auth.signInWithPassword({
+            email: email,
+            password: senha,
+        })
+
+        if (error) {
+            // Exibe o erro exato do Supabase na tela do site
+            mensagemErro.textContent = 'Erro: ' + error.message
+            mensagemErro.style.color = 'red'
+        } else {
+            mensagemErro.textContent = 'Login com sucesso! A redirecionar...'
+            mensagemErro.style.color = 'green'
+            setTimeout(() => {
+                window.location.href = 'dashboard.html'
+            }, 1000)
+        }
+    } catch (err) {
+        mensagemErro.textContent = 'Erro de rede ou conexão: ' + err.message
+        mensagemErro.style.color = 'red'
+    }
+})
